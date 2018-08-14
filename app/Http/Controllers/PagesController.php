@@ -13,4 +13,14 @@ class PagesController extends Controller
 
         return view('pages.root');
     }
+
+    /**
+     * 登录用户邮箱未被验证时，进行验证页面
+     * @param  Request $request [description]
+     * @return [type]           [description]
+     */
+    public function emailVerifyNotice(Request $request)
+    {
+        return view('pages.email_verify_notice');
+    }
 }
