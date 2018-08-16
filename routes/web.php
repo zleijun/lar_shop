@@ -34,6 +34,8 @@ Route::group(['middleware' => 'auth'], function() {
         Route::get('user_addresses', 'UserAddressesController@index')->name('user_addresses.index');
         //添加用户地址
         Route::get('user_addresses/create', 'UserAddressesController@create')->name('user_addresses.create');
+        //添加地址处理
+        Route::post('user_addresses', 'UserAddressesController@store')->name('user_addresses.store');
     });
     // 结束
 });
