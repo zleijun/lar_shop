@@ -13,14 +13,25 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->rememberToken();
-            $table->timestamps();
-        });
+        if(!Schema::hasTable('users')){
+            //不存在创建
+            Schema::create('users', function (Blueprint $table) {
+                $table->increments('id');
+                $table->string('name')->comment('姓名');
+                $table->string('email')->unique();
+                $table->string('password');
+                $table->rememberToken();
+                $table->timestamps();
+            });
+        }else{
+            Schema::table('users', function (Blueprint $table) {
+                //检测字段是否存在,不存在则创建
+                if(!Schema::hasColumn('users','email_verified')){
+                    $table->boolean('email_verified')->default(false)->after('remember_token');
+                }
+            });
+        }
+        
     }
 
     /**
