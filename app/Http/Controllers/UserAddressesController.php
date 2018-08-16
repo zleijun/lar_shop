@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\UserAddress;
 class UserAddressesController extends Controller
 {
     public function index(Request $request)
@@ -12,5 +12,14 @@ class UserAddressesController extends Controller
         return view('user_addresses.index', [
             'addresses' => $request->user()->addresses,
         ]);
+    }
+
+    /**
+     * 添加收货地址
+     * @return [type] [description]
+     */
+    public function create()
+    {
+        return view('user_addresses.create_and_edit', ['address' => new UserAddress()]);
     }
 }
